@@ -1,8 +1,6 @@
 from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
 from django.contrib.auth.models import PermissionsMixin
 from django.db import models
-from django.forms import CharField
-
 
 class UserManager(BaseUserManager):
     use_in_migrations = True
@@ -51,19 +49,19 @@ class Advertiser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(
         verbose_name='email address',
         max_length=255,
-        unique=True
+        blank=True,
+        default=''
     )
     uid = models.CharField(max_length=255, unique=True)
-    phone_number = CharField(max_length=15)
-    address = CharField(max_length=255)
-    name = models.CharField(max_length=15)
+    phone_number = models.CharField(max_length=15, blank=True, default='')
+    address = models.CharField(max_length=255, blank=True, default='')
+    name = models.CharField(max_length=15, blank=True, default='')
 
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
 
 
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['name']
+    USERNAME_FIELD = 'uid'
 
     def __str__(self):
         return self.name
