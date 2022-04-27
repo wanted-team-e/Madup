@@ -55,7 +55,7 @@ class Advertiser(AbstractBaseUser, PermissionsMixin):
     )
     uid = models.CharField(max_length=255, unique=True)
     phone_number = CharField(max_length=15)
-    address = CharField( max_length=255)
+    address = CharField(max_length=255)
     name = models.CharField(max_length=15)
 
     is_active = models.BooleanField(default=True)
