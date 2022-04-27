@@ -1,16 +1,13 @@
-
 from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
 from django.contrib.auth.models import PermissionsMixin
 from django.db import models
 from django.forms import CharField
-import uuid
-
 
 
 class UserManager(BaseUserManager):
     def create_user(self, email, name, password, **kwargs):
         """
-        Creates and saves a User with the given email, 
+        Creates and saves a User with the given email,
         name and password.
         """
         if not email:
