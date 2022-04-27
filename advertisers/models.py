@@ -5,6 +5,8 @@ from django.forms import CharField
 
 
 class UserManager(BaseUserManager):
+    use_in_migrations = True
+
     def create_user(self, email, name, password, **kwargs):
         """
         Creates and saves a User with the given email,
@@ -39,6 +41,7 @@ class UserManager(BaseUserManager):
             **kwargs
         )
         user.is_admin = True
+        user.is_superuser = True
         user.save(using=self._db)
         return user
 
@@ -64,3 +67,7 @@ class Advertiser(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return self.name
+
+    @property
+    def is_staff(self):
+        return self.is_admin
