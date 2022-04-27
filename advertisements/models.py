@@ -10,6 +10,11 @@ class Advertisements(models.Model):
 class AdvertisementsInfo(models.Model):
     advertisement = models.ForeignKey('advertisements.Advertisements', on_delete=models.CASCADE)
     media = models.ForeignKey('advertisements.Media', on_delete=models.CASCADE)
+    cost = models.PositiveIntegerField(default=0)
+    impression = models.PositiveIntegerField(default=0)
+    click = models.PositiveIntegerField(default=0)
+    conversion = models.PositiveIntegerField(default=0)
+    cv = models.PositiveIntegerField(default=0)
     cost = models.PositiveIntegerField()
     impression = models.PositiveIntegerField()
     click = models.PositiveIntegerField()
