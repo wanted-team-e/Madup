@@ -15,8 +15,8 @@ class AdvertisementsInfo(models.Model):
     click = models.PositiveIntegerField()
     conversion = models.PositiveIntegerField()
     cv = models.PositiveIntegerField()
-    created_at = models.DateField()
-    updated_at = models.DateField()
+    created_at = models.DateField(auto_now_add=True)
+    updated_at = models.DateField(auto_now=True)
 
 
 
