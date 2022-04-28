@@ -10,13 +10,18 @@ DJANGO_SETTINGS_MODULE = config.settings
 
 
 from django.urls import reverse
-from advertisers.models import Advertiser
 import pytest, json
 # Create your tests here.
 
 advertiser_url = reverse('advertisers-list')
+advertiser_url_detail = reverse('advertisers-detail', args = ['12412'])
 pytestmark = pytest.mark.django_db
 
+
+# Detail 값 get 확인
+def test_detail_get(client):
+    response = client.get(advertiser_url_detail)
+    assert response.status_code == 200
 
 
 
@@ -25,6 +30,7 @@ def test_zero_data_or_empty_list(client):
     response = client.get(advertiser_url)
     assert response.status_code == 200
     assert json.loads(response.content) == []
+    print(advertiser_url_detail)
 
 
 # # POST method 기능 확인
