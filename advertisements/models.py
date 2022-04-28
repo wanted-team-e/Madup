@@ -27,23 +27,3 @@ class AdvertisementInfo(models.Model):
         max_length=15,
         choices=MediaType.choices
     )
-
-    @property
-    def CTR(self):
-        return self.click * 100 / self.impression
-    
-    @property
-    def ROAS(self):
-        return self.conversion * 100 / self.cost
-    
-    @property
-    def CPC(self):
-        return self.cost / self.click
-    
-    @property
-    def CVR(self):
-        return self.conversion * 100 / self.click
-    
-    @property
-    def CPA(self):
-        return self.cost / self.conversion
