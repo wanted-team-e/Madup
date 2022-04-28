@@ -2,11 +2,11 @@ from django.db import models
 from django.http import RawPostDataException
 
 class Advertisement(models.Model):
-    advertisement_uid = models.CharField(max_length=65, unique=True)
+    advertisement_uid = models.CharField(max_length=65, primary_key=True)
     advertiser = models.ForeignKey('advertisers.Advertiser', on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.uid
+        return self.advertisement_uid
 
 class AdvertisementInfo(models.Model):
     advertisement = models.ForeignKey('advertisements.Advertisement', on_delete=models.CASCADE)

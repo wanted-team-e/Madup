@@ -8,11 +8,10 @@ class AdvertiserSerializer(serializers.ModelSerializer):
     class Meta:
         model = Advertiser
         fields = (
-            'id',
-            'email',
+            'advertiser_uid',
             'phone_number',
             'address',
-            'name',
+            'username',
         )
 
 class RelatedAdvertisementSerializer(serializers.ModelSerializer):
