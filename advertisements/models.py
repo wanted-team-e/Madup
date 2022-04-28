@@ -21,7 +21,7 @@ class AdvertisementInfo(models.Model):
         KAKAO = 'kakao'
         GOOGLE = 'google'
         FACEBOOK = 'facebook'
-    name = models.CharField(
+    media = models.CharField(
         max_length=15,
         choices=MediaType.choices
     )
