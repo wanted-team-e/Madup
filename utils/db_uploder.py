@@ -4,7 +4,7 @@ import csv
 import sys
 
 # system setup
-os.chdir('.')
+os.chdir('..')
 print('Current dir의 경로 : ', end=''), print(os.getcwd())  # os가 파악한 현재 경로를 표기
 print('os.path.abspath(__file__)의 경로 : ', os.path.abspath(__file__))  # 현재 작업중인 파일을 포함 경로를 구체적으로 표기
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -68,13 +68,12 @@ def insert_advertisement_info() :
             if row['advertiser']:
                 AdvertisementInfo.objects.create(advertisement_id = row['uid'],
                                                  media = row['media'],
+                                                 date=row['date'],
                                                  cost = int(row['cost']),
                                                  impression = int(row['impression']),
                                                  click = int(row['click']),
                                                  conversion = int(row['conversion']),
-                                                 cv = int(row['cv']),
-                                                 created_at=row['date'],
-                                                 updated_at=row['date'])
+                                                 cv = int(row['cv']))
 
 
     print('AdvertisementInfo DATA UPLOADED SUCCESSFULY!')
