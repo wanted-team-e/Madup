@@ -1,5 +1,5 @@
 from django.contrib import admin
 
-from advertisements.models import Advertisements, AdvertisementsInfo
+from advertisements.models import Advertisement, AdvertisementInfo
 
-admin.site.register([Advertisements, AdvertisementsInfo])
+admin.site.register([Advertisement, AdvertisementInfo])

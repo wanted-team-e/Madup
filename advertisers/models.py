@@ -1,7 +1,7 @@
 from django.db import models
 
 class Advertiser(models.Model):
-    uid = models.CharField(max_length=255, unique=True)
+    advertiser_uid = models.CharField(max_length=255, unique=True)
     phone_number = models.CharField(max_length=15, blank=True, default='')
     address = models.CharField(max_length=255, blank=True, default='')
     username = models.CharField(max_length=15, blank=True, default='')

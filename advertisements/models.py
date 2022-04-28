@@ -1,14 +1,14 @@
 from django.db import models
 
-class Advertisements(models.Model):
-    uid = models.CharField(max_length=65, unique=True)
+class Advertisement(models.Model):
+    advertisement_uid = models.CharField(max_length=65, unique=True)
     advertiser = models.ForeignKey('advertisers.Advertiser', on_delete=models.CASCADE)
 
     def __str__(self):
         return self.uid
 
-class AdvertisementsInfo(models.Model):
-    advertisement = models.ForeignKey('advertisements.Advertisements', on_delete=models.CASCADE)
+class AdvertisementInfo(models.Model):
+    advertisement = models.ForeignKey('advertisements.Advertisement', on_delete=models.CASCADE)
     cost = models.PositiveIntegerField(default=0)
     impression = models.PositiveIntegerField(default=0)
     click = models.PositiveIntegerField(default=0)
