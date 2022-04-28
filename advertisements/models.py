@@ -1,4 +1,5 @@
 from django.db import models
+from django.http import RawPostDataException
 
 class Advertisement(models.Model):
     advertisement_uid = models.CharField(max_length=65, unique=True)
@@ -16,6 +17,7 @@ class AdvertisementInfo(models.Model):
     cv = models.PositiveIntegerField(default=0)
     created_at = models.DateField(auto_now_add=True)
     updated_at = models.DateField(auto_now=True)
+
     class MediaType(models.TextChoices):
         NAVER = 'naver'
         KAKAO = 'kakao'
@@ -25,3 +27,23 @@ class AdvertisementInfo(models.Model):
         max_length=15,
         choices=MediaType.choices
     )
+
+    @property
+    def CTR(self):
+        return self.click * 100 / self.impression
+    
+    @property
+    def ROAS(self):
+        return self.conversion * 100 / self.cost
+    
+    @property
+    def CPC(self):
+        return self.cost / self.click
+    
+    @property
+    def CVR(self):
+        return self.conversion * 100 / self.click
+    
+    @property
+    def CPA(self):
+        return self.cost / self.conversion
