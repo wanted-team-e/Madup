@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from advertisements.models import AdvertisementsInfo
+from advertisements.models import AdvertisementInfo
 from advertisers.models import Advertiser
 
 
@@ -17,7 +17,7 @@ class AdvertiserSerializer(serializers.ModelSerializer):
 
 class RelatedAdvertisementSerializer(serializers.ModelSerializer):
     class Meta:
-        model = AdvertisementsInfo
+        model = AdvertisementInfo
         fields = (
             ''
         )
