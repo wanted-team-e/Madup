@@ -1,3 +1,4 @@
+import sys
 from datetime import datetime
 import os
 import django
@@ -6,6 +7,7 @@ import csv
 # 작성자: 강정희
 
 # system setup
+sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)) + '/app')))
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", 'config.settings.develop')
 django.setup()
 
