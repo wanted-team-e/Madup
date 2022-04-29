@@ -57,7 +57,7 @@ def insert_advertisement() :
         for row in data_reader:
             if row['uid_filter']:
                 Advertisement.objects.create(advertisement_uid = row['uid_filter'],
-                                             advertiser_id = row['advertiser_filter'])
+                                            advertiser_id = row['advertiser_filter'])
 
     print('Advertisement DATA UPLOADED SUCCESSFULY!')
 
@@ -69,14 +69,14 @@ def insert_advertisement_info() :
         for row in data_reader:
             if row['advertiser']:
                 AdvertisementInfo.objects.get_or_create(advertisement_id = row['uid'],
-                                                 media = row['media'],
-                                                 cost = int(row['cost']),
-                                                 impression = int(row['impression']),
-                                                 click = int(row['click']),
-                                                 conversion = int(row['conversion']),
-                                                 cv = int(row['cv']),
-                                                 date=datetime.strptime(row['date'], "%Y.%m.%d"),
-                                                 )
+                                                media = row['media'],
+                                                cost = int(row['cost']),
+                                                impression = int(row['impression']),
+                                                click = int(row['click']),
+                                                conversion = int(row['conversion']),
+                                                cv = int(row['cv']),
+                                                date=datetime.strptime(row['date'], "%Y.%m.%d"),
+                                                )
 
 
     print('AdvertisementInfo DATA UPLOADED SUCCESSFULY!')
