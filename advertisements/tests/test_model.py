@@ -1,20 +1,33 @@
-from django.urls import reverse
 from advertisements.models import Advertisement, AdvertisementInfo
 import pytest
 
 
-
-# advertisement_url = reverse('')
 pytestmark = pytest.mark.django_db
 
 
-# Advertisements model 확인
-def test_advertisment_instance(client, Advertisement_Fa):
-
-    data = Advertisement_Fa
+# Advertiser model 확인
+def test_advertisment_instance(advertiser_fa):
     
-    obj = Advertisement.objects.create(advertisement_uid='entry', advertiser=data)
-    assert obj.advertisement_uid == 'entry'
+    obj = advertiser_fa.create(phone_number='123')
+    print(obj)
+    assert obj.phone_number == '123'
+
+
+# Advertisement model 확인
+def test_advertisment_instance(advertisement_fa):
+    
+    obj = advertisement_fa.create(phone_number='123')
+    print(obj)
+    assert obj.phone_number == '123'
+
+
+# AdvertisementInfo model 확인
+def test_advertisment_instance(advertiser_fa):
+    
+    obj = advertiser_fa.create(phone_number='123')
+    print(obj)
+    assert obj.phone_number == '123'
+
 
 
 # Advertisements_info constraint 확인 

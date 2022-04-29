@@ -18,29 +18,17 @@ from ..models import Advertiser
 # Create your tests here.
 
 advertiser_url = reverse('advertisers-list') # /api/advertiser
-advertiser_url_detail = reverse('advertisers-detail', kwargs={'pk':'13123'}) # /api/advertiser/13123
 
 pytestmark = pytest.mark.django_db
 
-
-def test_adversiter():
-    a = Advertiser.objects.all()
-    print(a)
-    assert True
+"""
+작성자: 김채욱 - 테스트 코드 작성
+"""
 
 
+# POST /api/advertiser
+def test_advertiser_get_post():
 
-# Detail retrieve가 안됨, 확인 필요
-# @pytest.mark.skip
-def test_detail_get(api_client):
-    client = api_client()
-    response = client.get(advertiser_url_detail)
-    print(Advertiser.objects.all().values('advertiser_uid'))
-    assert response.status_code == 200
-
-
-# List 확인
-def test_zero_data_or_empty_list(client):
     Advertiser.objects.create(
         advertiser_uid= "13123",
         phone_number= "1231312",
@@ -48,49 +36,149 @@ def test_zero_data_or_empty_list(client):
         username= "1"
     )
 
-    response = client.get(advertiser_url)
-    print(advertiser_url)
+    obj = Advertiser.objects.get(advertiser_uid='13123')
+    print(obj)
+    assert obj.advertiser_uid == '13123'
+
+
+# GET /api/advertiser/:pk
+def test_advertiser_detail_get(client):
+    client.post(path=advertiser_url, data={
+        "advertiser_uid": "13123",
+        "phone_number": "13123",
+        "address": "13123",
+        "username": "13123"
+    })
+    
+    advertiser_url_detail = reverse('advertisers-detail', kwargs={'pk':'13123'})
+
+    response = client.get(advertiser_url_detail)
+
+    print(response.content)
     assert response.status_code == 200
     assert json.loads(response.content) == {
-    "advertiser_uid": "13123",
-    "phone_number": "1231312",
-    "address": "sdfsdf",
-    "username": "1"
+        "advertiser_uid": "13123",
+        "phone_number": "13123",
+        "address": "13123",
+        "username": "13123"
     }
 
 
-# # POST method 기능 확인
-def test_success_post_method(client):
-    request = client.post(path=advertiser_url, 
-    data={
-    "advertiser_uid": "4142214",
-    "phone_number": "14242142",
-    "address": "house",
-    "username": "dsaf"
+# PATCH /api/advertiser/:pk
+def test_advertiser_detail_patch(client):
+    client.post(path=advertiser_url, data={
+        "advertiser_uid": "13123",
+        "phone_number": "13123",
+        "address": "13123",
+        "username": "13123"
     })
-    assert request.status_code == 201
 
-# 중복데이터 POST 확인
+    advertiser_url_detail = reverse('advertisers-detail', kwargs={'pk':'13123'})
+
+    req = client.patch(path=advertiser_url_detail, data={
+        "username": "777"
+    }, content_type='application/json')
+
+
+    response = client.get(advertiser_url_detail)
+    print(req)
+    assert response.status_code == 200
+    assert json.loads(response.content) == {
+        "advertiser_uid": "13123",
+        "phone_number": "13123",
+        "address": "13123",
+        "username": "777"
+    }
+
+
+
+
+# PUT /api/advertiser/:pk
+def test_advertiser_detail_put(client):
+    client.post(path=advertiser_url, data={
+        "advertiser_uid": "13123",
+        "phone_number": "13123",
+        "address": "13123",
+        "username": "13123"
+    })
+
+    advertiser_url_detail = reverse('advertisers-detail', kwargs={'pk':'13123'})
+
+    req = client.patch(path=advertiser_url_detail, data={
+        "advertiser_uid": "777",
+        "phone_number": "777",
+        "address": "777",
+        "username": "777"
+    }, content_type='application/json')
+    
+    advertiser_url_detail = reverse('advertisers-detail', kwargs={'pk':'777'})
+
+    response = client.get(advertiser_url_detail)
+    
+    assert response.status_code == 200
+    assert json.loads(response.content) == {
+        "advertiser_uid": "777",
+        "phone_number": "777",
+        "address": "777",
+        "username": "777"
+    }
+
+
+# DELETE /api/advertiser/:pk
+def test_advertiser_detail_delete(client):
+    client.post(path=advertiser_url, data={
+        "advertiser_uid": "13123",
+        "phone_number": "13123",
+        "address": "13123",
+        "username": "13123"
+    })
+
+    advertiser_url_detail = reverse('advertisers-detail', kwargs={'pk':'13123'})
+
+    req = client.delete(advertiser_url_detail)
+
+    assert req.status_code == 204
+
+
+
+
+# Post 중복 데이터 방지
 @pytest.mark.xfail
 def test_duplicate_post_method(client):
+    client.post(path=advertiser_url, 
+    data={
+        "advertiser_uid": "4142214",
+        "phone_number": "14242142",
+        "address": "house",
+        "username": "dsaf"
+    })
+
     request = client.post(path=advertiser_url, 
     data={
-    "advertiser_uid": "4142214",
-    "phone_number": "14242142",
-    "address": "house",
-    "username": "dsaf"
+        "advertiser_uid": "4142214",
+        "phone_number": "14242142",
+        "address": "house",
+        "username": "dsaf"
     })
+
     assert request.status_code == 400
     assert json.loads(request.content) == {
     "advertiser_uid": [
         "advertiser with this advertiser uid already exists."
-    ]
-    }
+    ]}
 
 
-# Post method 실패 확인
+# Post pk 확인
 def test_fail_post_noarguments(client):
-    request = client.post(path=advertiser_url)
+    request = client.post(path=advertiser_url, 
+        data={
+            "advertiser_uid": "",
+            "phone_number": "14242142",
+            "address": "house",
+            "username": "dsaf"
+    })
+
+
     assert request.status_code == 400
     assert json.loads(request.content) == {
     "advertiser_uid": [

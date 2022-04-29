@@ -7,26 +7,26 @@ from advertisements.models import Advertisement, AdvertisementInfo
 from advertisers.models import Advertiser
 
 
-class Advertiser_Fa(factory.django.DjangoModelFactory):
+class AdvertiserFa(factory.django.DjangoModelFactory):
     class Meta:
         model = Advertiser
 
     advertiser_uid = fake.name()
 
 
-class Advertisement_Fa(factory.django.DjangoModelFactory):
+class AdvertisementFa(factory.django.DjangoModelFactory):
     class Meta:
         model = Advertisement
 
     advertisement_uid = fake.name()
-    advertiser = factory.SubFactory(Advertiser_Fa)
+    advertiser = factory.SubFactory(AdvertiserFa)
 
 
-class AdvertisementInfo_Fa(factory.django.DjangoModelFactory):
+class AdvertisementInfoFa(factory.django.DjangoModelFactory):
     class Meta:
         model = AdvertisementInfo
     
-    advertisement = factory.SubFactory(Advertisement_Fa)
+    advertisement = factory.SubFactory(AdvertisementFa)
     cost = 100
     impression = 10
     click = 3
