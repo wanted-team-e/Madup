@@ -17,14 +17,16 @@ class AdvertiserViewSet(viewsets.ModelViewSet):
         start_date = request.query_params.get('start_date', None)
         end_date = request.query_params.get('end_date', None)
 
-        try:
-            advertisements = AdvertisementInfo.objects.filter(advertisement__advertiser__advertiser_uid=pk,
-                                                            date__gte=start_date, date__lte=end_date)
-        except ValueError:
-            return Response({'error': {
-                'code': 404,
-                'message': "기간은 'start_date=yyyy-mm-dd&end_date=yyyy-mm-dd' 형식으로 요청 가능합니다."
-            }}, status=status.HTTP_404_NOT_FOUND)
+        if start_date and end_date:
+            try:
+                advertisements = AdvertisementInfo.objects.filter(advertisement__advertiser__advertiser_uid=pk,
+                                                                  date__gte=start_date, date__lte=end_date)
+            except ValueError:
+                return Response({'error_message': "기간은 'start_date=yyyy-mm-dd&end_date=yyyy-mm-dd' 형식으로 요청 가능합니다."},
+                                status=status.HTTP_400_BAD_REQUEST)
+
+        if not(start_date and end_date):
+            advertisements = AdvertisementInfo.objects.filter(advertisement__advertiser__advertiser_uid=pk)
 
         media_list = advertisements.values('media').distinct()
         results = {}
@@ -45,6 +47,6 @@ class AdvertiserViewSet(viewsets.ModelViewSet):
                 'cvr': 0 if statistics['total_click'] == 0 else round(statistics['total_conversion'] * 100 / statistics['total_click'], 2),
                 'cpa': 0 if statistics['total_conversion'] == 0 else round(statistics['total_cost'] / statistics['total_conversion'], 2),
             }
-            
+
             results[media['media']] = result
         return Response(results, status=status.HTTP_200_OK)
