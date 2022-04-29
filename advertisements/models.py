@@ -15,8 +15,8 @@ class AdvertisementInfo(models.Model):
     click = models.PositiveIntegerField(default=0)
     conversion = models.PositiveIntegerField(default=0)
     cv = models.PositiveIntegerField(default=0)
-    created_at = models.DateField(auto_now_add=True)
-    updated_at = models.DateField(auto_now=True)
+    date = models.DateField(db_index=True)
+
 
     class MediaType(models.TextChoices):
         NAVER = 'naver'
@@ -27,3 +27,9 @@ class AdvertisementInfo(models.Model):
         max_length=15,
         choices=MediaType.choices
     )
+
+    class Meta:
+        indexes = [
+            models.Index(fields=['advertisement'], name='advertisement_uid_idx'),
+            models.Index(fields=['date'], name='advertisement_info_idx'),
+        ]
