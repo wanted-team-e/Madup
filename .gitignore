@@ -80,3 +80,4 @@ __pycache__
 .env
 static/
 data/
+nginx.conf

@@ -1,6 +1,5 @@
 from rest_framework import serializers
 
-from advertisements.models import AdvertisementInfo
 from advertisers.models import Advertiser
 
 
@@ -12,11 +11,4 @@ class AdvertiserSerializer(serializers.ModelSerializer):
             'phone_number',
             'address',
             'username',
-        )
-
-class RelatedAdvertisementSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = AdvertisementInfo
-        fields = (
-            ''
         )

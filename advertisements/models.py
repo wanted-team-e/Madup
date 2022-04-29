@@ -14,8 +14,8 @@ class AdvertisementInfo(models.Model):
     click = models.PositiveIntegerField(default=0)
     conversion = models.PositiveIntegerField(default=0)
     cv = models.PositiveIntegerField(default=0)
-    created_at = models.DateField(auto_now_add=True)
-    updated_at = models.DateField(auto_now=True)
+    date = models.DateField(db_index=True)
+
     class MediaType(models.TextChoices):
         NAVER = 'naver'
         KAKAO = 'kakao'
