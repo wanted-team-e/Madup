@@ -4,6 +4,7 @@ import pytest
 
 pytestmark = pytest.mark.django_db
 
+#작성자: 김채욱
 
 # Advertiser model 확인
 def test_advertiser_instance(advertiser_fa):

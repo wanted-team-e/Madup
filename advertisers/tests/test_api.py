@@ -10,9 +10,9 @@ advertiser_url = reverse('advertisers-list') # /api/advertiser
 
 pytestmark = pytest.mark.django_db
 
-"""
-작성자: 김채욱 - 테스트 코드 작성
-"""
+
+#작성자: 김채욱
+
 
 
 # POST /api/advertiser
@@ -65,6 +65,9 @@ def test_advertiser_detail_patch(client):
     advertiser_url_detail = reverse('advertisers-detail', kwargs={'pk':'13123'})
 
     req = client.patch(path=advertiser_url_detail, data={
+        "advertiser_uid": "13123",
+        "phone_number": "13123",
+        "address": "13123",
         "username": "777"
     }, content_type='application/json')
 
@@ -93,20 +96,20 @@ def test_advertiser_detail_put(client):
 
     advertiser_url_detail = reverse('advertisers-detail', kwargs={'pk':'13123'})
 
-    req = client.patch(path=advertiser_url_detail, data={
-        "advertiser_uid": "777",
+    req = client.put(path=advertiser_url_detail, data={
+        "advertiser_uid": "13123",
         "phone_number": "777",
         "address": "777",
         "username": "777"
     }, content_type='application/json')
     
-    advertiser_url_detail = reverse('advertisers-detail', kwargs={'pk':'777'})
+    advertiser_url_detail = reverse('advertisers-detail', kwargs={'pk':'13123'})
 
     response = client.get(advertiser_url_detail)
     
     assert response.status_code == 200
     assert json.loads(response.content) == {
-        "advertiser_uid": "777",
+        "advertiser_uid": "13123",
         "phone_number": "777",
         "address": "777",
         "username": "777"
@@ -127,6 +130,54 @@ def test_advertiser_detail_delete(client):
     req = client.delete(advertiser_url_detail)
 
     assert req.status_code == 204
+
+
+# GET /api/advertiser/pk/statistics
+def test_advertiser_detail_statistics(client):
+    
+    obj = Advertiser.objects.create(
+        advertiser_uid= "1",
+        phone_number= "1",
+        address= "1",
+        username= "1"
+    )
+
+    obj1 = Advertisement.objects.create(
+        advertisement_uid='1',
+        advertiser=obj
+    )
+
+    obj2 = Advertisement.objects.create(
+        advertisement_uid='2',
+        advertiser=obj
+    )
+
+    info1 = AdvertisementInfo.objects.create(
+        advertisement=obj1,
+        cost=100,
+        impression=10,
+        click=3,
+        conversion=1,
+        cv=1000,
+        date='2019-01-01',
+        media='naver'
+    )
+
+    info2 = AdvertisementInfo.objects.create(
+        advertisement=obj2,
+        cost=100,
+        impression=10,
+        click=3,
+        conversion=1,
+        cv=1000,
+        date='2019-01-02',
+        media='naver'
+    )
+
+    res = client.get(path='http://127.0.0.1:8000/api/advertiser/1/statistics')
+    print(res)
+    assert res.status_code == 200
+
 
 
 
@@ -172,14 +223,7 @@ def test_advertiser_detail_time(client):
         media='naver'
     )
 
-    # param = '?start_date=2019-01-1&end_date=2019-01-02'
-    # temp_url = reverse(advertiser_url,kwargs={'pk':'1'})
-    # static_url = reverse(temp_url, args=['statics'])
-
-    # filter_url = static_url + param
-    # print(filter_url)
-
-    res = client.get(path='http://127.0.0.1:8000/api/advertiser/statistics/?start_date=2019-01-01&end_date=2019-01-02')
+    res = client.get(path='http://127.0.0.1:8000/api/advertiser/1/statistics?start_date=2019-01-01&end_date=2019-01-02')
     print(res)
     assert res.status_code == 200
 
