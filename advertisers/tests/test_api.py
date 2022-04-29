@@ -179,7 +179,7 @@ def test_advertiser_detail_time(client):
     # filter_url = static_url + param
     # print(filter_url)
 
-    res = client.get(path='http://127.0.0.1:8000/api/advertiser/statics/:1?start_date=2019-01-01&end_date=2019-01-02')
+    res = client.get(path='http://127.0.0.1:8000/api/advertiser/statistics/?start_date=2019-01-01&end_date=2019-01-02')
     print(res)
     assert res.status_code == 200
 
