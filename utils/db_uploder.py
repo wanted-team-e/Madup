@@ -2,20 +2,16 @@ from datetime import datetime
 import os
 import django
 import csv
-import sys
-
-from django.conf import settings
-from advertisers.models import *
-from advertisements.models import *
 
 # 작성자: 강정희
 
 # system setup
-os.chdir('..')
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-sys.path.append(BASE_DIR)
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", 'config.settings')
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", 'config.settings.develop')
 django.setup()
+
+from django.conf import settings
+from advertisers.models import *
+from advertisements.models import *
 
 # db upload
 base_path = settings.DATA_ROOT_URL + settings.DATA_URL
