@@ -144,3 +144,4 @@ $ python manage.py runserver --settings=config.settings.develop
 	- model testing, exceiption handing : [서재환](https://github.com/woodstock1993)
 	- modeling, advertisement API, dockerize : [이형준](https://github.com/leeceo97)
 - 이름을 클릭하면 개인 repository도 확인 가능합니다.
+
