@@ -1,8 +1,14 @@
-asgiref==3.5.0
-Django==4.0.4
-django-environ==0.8.1
-djangorestframework==3.13.1
-phonenumbers==8.12.47
-pytz==2022.1
-sqlparse==0.4.2
-tzdata==2022.1
+asgiref             3.5.0
+Django              4.0.4
+django-environ      0.8.1
+django-extensions   3.1.5
+djangorestframework 3.13.1
+graphviz            0.20
+phonenumbers        8.12.47
+pip                 22.0.4
+pydot               1.4.2
+pyparsing           3.0.8
+pytz                2022.1
+setuptools          58.1.0
+sqlparse            0.4.2
+tzdata              2022.1

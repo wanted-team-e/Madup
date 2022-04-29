@@ -7,6 +7,11 @@ class Advertisement(models.Model):
     def __str__(self):
         return self.advertisement_uid
 
+    class Meta:
+        indexes = [
+            models.Index(fields=['advertiser']),
+        ]
+
 class AdvertisementInfo(models.Model):
     advertisement = models.ForeignKey('advertisements.Advertisement', on_delete=models.CASCADE)
     cost = models.PositiveIntegerField(default=0)
@@ -28,6 +33,5 @@ class AdvertisementInfo(models.Model):
 
     class Meta:
         indexes = [
-            models.Index(fields=['advertisement'], name='advertisement_uid_idx'),
-            models.Index(fields=['date'], name='advertisement_info_idx'),
+            models.Index(fields=['advertisement' ,'date'] ),
         ]
