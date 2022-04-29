@@ -14,13 +14,21 @@ class AdvertiserViewSet(viewsets.ModelViewSet):
 
     @action(detail=True, methods=['get'])
     def statistics(self, request, pk):
-        # start_date, end_date
         start_date = request.query_params.get('start_date', None)
         end_date = request.query_params.get('end_date', None)
 
-        advertisements = AdvertisementInfo.objects.filter(advertisement__advertiser__advertiser_uid=pk, date__gte=start_date, date__lte=end_date)
+        try:
+            advertisements = AdvertisementInfo.objects.filter(advertisement__advertiser__advertiser_uid=pk,
+                                                              date__gte=start_date, date__lte=end_date)
+        except ValueError:
+            return Response({'error': {
+                'code': 404,
+                'message': "기간은 'start_date=yyyy-mm-dd&end_date=yyyy-mm-dd' 형식으로 요청 가능합니다."
+            }}, status=status.HTTP_404_NOT_FOUND)
+
         media_list = advertisements.values('media').distinct()
         results = {}
+
         for media in media_list:
             statistics = advertisements.filter(media=media['media']).aggregate(
                 total_cost=Sum('cost'),
@@ -30,7 +38,6 @@ class AdvertiserViewSet(viewsets.ModelViewSet):
                 total_cv=Sum('cv'),
             )
 
-            # zero division error 처리 부탁드려요
             result = {
                 'ctr': round(statistics['total_click'] * 100 / statistics['total_impression'], 2),
                 'cpc': round(statistics['total_cost'] / statistics['total_click'], 2),
