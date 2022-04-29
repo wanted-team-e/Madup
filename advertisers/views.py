@@ -14,6 +14,7 @@ class AdvertiserViewSet(viewsets.ModelViewSet):
 
     @action(detail=True, methods=['get'])
     def statistics(self, request, pk):
+        # start_date, end_date
         start_date = request.query_params.get('start_date', None)
         end_date = request.query_params.get('end_date', None)
 
@@ -29,6 +30,7 @@ class AdvertiserViewSet(viewsets.ModelViewSet):
                 total_cv=Sum('cv'),
             )
 
+            # zero division error 처리 부탁드려요
             result = {
                 'ctr': round(statistics['total_click'] * 100 / statistics['total_impression'], 2),
                 'cpc': round(statistics['total_cost'] / statistics['total_click'], 2),
