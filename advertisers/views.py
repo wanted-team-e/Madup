@@ -41,11 +41,11 @@ class AdvertiserViewSet(viewsets.ModelViewSet):
             )
 
             result = {
-                'ctr': 0 if statistics['total_impression'] == 0 else round(statistics['total_click'] * 100 / statistics['total_impression'], 2),
-                'roas': 0 if statistics['total_cost'] == 0 else round(statistics['total_cv'] / statistics['total_cost'], 2),
-                'cpc': 0 if statistics['total_cost'] == 0 else round(statistics['total_cost'] / statistics['total_click'], 2),
-                'cvr': 0 if statistics['total_click'] == 0 else round(statistics['total_conversion'] * 100 / statistics['total_click'], 2),
-                'cpa': 0 if statistics['total_conversion'] == 0 else round(statistics['total_cost'] / statistics['total_conversion'], 2),
+                'ctr': 0.0 if statistics['total_impression'] == 0 else round(statistics['total_click'] * 100 / statistics['total_impression'], 2),
+                'roas': 0.0 if statistics['total_cost'] == 0 else round(statistics['total_cv'] / statistics['total_cost'], 2),
+                'cpc': 0.0 if statistics['total_cost'] == 0 else round(statistics['total_cost'] / statistics['total_click'], 2),
+                'cvr': 0.0 if statistics['total_click'] == 0 else round(statistics['total_conversion'] * 100 / statistics['total_click'], 2),
+                'cpa': 0.0 if statistics['total_conversion'] == 0 else round(statistics['total_cost'] / statistics['total_conversion'], 2),
             }
 
             results[media['media']] = result
