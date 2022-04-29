@@ -38,18 +38,5 @@
 **광고주 삭제** : DELETE /api/advertiser/:pk
 - pk 값에 해당하는 광고주를 삭제합니다.
 
-**광고주 미디어별 광고 통계 조회** : GET /api/advertiser/:pk
-- pk 값에 해당하는 광고주의 미디어별 광고 통계 정보를 조회합니다.
-
-**광고주 미디어별 광고 통계 조회 - 기간 필터링** : GET /api/advertiser/:pk?start_date=yyyy-mm-dd&end_date=yyyy-mm-dd
+**광고주 미디어별 광고 통계 조회 - 기간 필터링** : GET /api/advertiser/:pk/statistics?start_date=yyyy-mm-dd&end_date=yyyy-mm-dd
 - pk 값에 해당하는 광고주의 미디어별 광고 통계 정보를 파라미터로 넘어온 기간에 따라 필터링하여 조회합니다.
-
-#### advertisement 관련
-**광고 정보 조회** : GET /api/advertisement/:pk
-- pk 값에 해당하는 광고를 조회합니다.
-
-**광고 정보 수정** : PUT /api/advertisement/:pk
-- pk 값에 해당하는 광고 정보를 수정합니다.
-
-**광고 삭제** : DELETE api/advertisement/:pk
-- pk 값에 해당하는 광고를 삭제합니다.
