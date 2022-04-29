@@ -1,6 +1,6 @@
 from django.db.models import Sum
 from rest_framework import viewsets, status
-from rest_framework.decorators import action
+from rest_framework.decorators import action, api_view
 from rest_framework.response import Response
 
 from advertisements.models import AdvertisementInfo
@@ -50,3 +50,7 @@ class AdvertiserViewSet(viewsets.ModelViewSet):
 
             results[media['media']] = result
         return Response(results, status=status.HTTP_200_OK)
+
+@api_view(['GET'])
+def ping_pong(request):
+    return Response({'server':'on'}, status=status.HTTP_200_OK)
