@@ -1,5 +1,5 @@
 from django.db import models
-
+# 작성자: 이형준, 강정희, 서재환, 김채욱
 class Advertisement(models.Model):
     advertisement_uid = models.CharField(max_length=65, primary_key=True)
     advertiser = models.ForeignKey('advertisers.Advertiser', on_delete=models.CASCADE)
