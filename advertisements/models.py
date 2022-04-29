@@ -25,3 +25,9 @@ class AdvertisementInfo(models.Model):
         max_length=15,
         choices=MediaType.choices
     )
+
+    class Meta:
+        indexes = [
+            models.Index(fields=['advertisement'], name='advertisement_uid_idx'),
+            models.Index(fields=['date'], name='advertisement_info_idx'),
+        ]
