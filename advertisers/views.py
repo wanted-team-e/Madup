@@ -7,7 +7,7 @@ from advertisements.models import AdvertisementInfo
 from .models import Advertiser
 from .serializers import AdvertiserSerializer
 
-
+#작성자: 이형준, 서재환, 강정희, 김채욱
 class AdvertiserViewSet(viewsets.ModelViewSet):
     queryset = Advertiser.objects.all()
     serializer_class = AdvertiserSerializer

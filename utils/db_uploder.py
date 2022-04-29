@@ -8,6 +8,8 @@ from django.conf import settings
 from advertisers.models import *
 from advertisements.models import *
 
+# 작성자: 강정희
+
 # system setup
 os.chdir('..')
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))

@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 from advertisers.models import Advertiser
-
+#작성자 : 이형준
 
 class AdvertiserSerializer(serializers.ModelSerializer):
     class Meta:
