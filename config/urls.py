@@ -16,7 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+from advertisers.views import ping_pong
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('advertisers.urls')),
+    path('', ping_pong)
 ]
