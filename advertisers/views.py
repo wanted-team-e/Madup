@@ -19,7 +19,7 @@ class AdvertiserViewSet(viewsets.ModelViewSet):
 
         try:
             advertisements = AdvertisementInfo.objects.filter(advertisement__advertiser__advertiser_uid=pk,
-                                                              date__gte=start_date, date__lte=end_date)
+                                                            date__gte=start_date, date__lte=end_date)
         except ValueError:
             return Response({'error': {
                 'code': 404,
@@ -39,11 +39,12 @@ class AdvertiserViewSet(viewsets.ModelViewSet):
             )
 
             result = {
-                'ctr': round(statistics['total_click'] * 100 / statistics['total_impression'], 2),
-                'cpc': round(statistics['total_cost'] / statistics['total_click'], 2),
-                'roas': round(statistics['total_cv'] * 100 / statistics['total_cost'], 2),
-                'cvr': round(statistics['total_conversion'] * 100 / statistics['total_click'], 2),
-                'cpa': round(statistics['total_cost'] / statistics['total_conversion'], 2),
+                'ctr': 0 if statistics['total_impression'] == 0 else round(statistics['total_click'] * 100 / statistics['total_impression'], 2),
+                'roas': 0 if statistics['total_cost'] == 0 else round(statistics['total_cv'] / statistics['total_cost'], 2),
+                'cpc': 0 if statistics['total_cost'] == 0 else round(statistics['total_cost'] / statistics['total_click'], 2),
+                'cvr': 0 if statistics['total_click'] == 0 else round(statistics['total_conversion'] * 100 / statistics['total_click'], 2),
+                'cpa': 0 if statistics['total_conversion'] == 0 else round(statistics['total_cost'] / statistics['total_conversion'], 2),
             }
+            
             results[media['media']] = result
         return Response(results, status=status.HTTP_200_OK)
