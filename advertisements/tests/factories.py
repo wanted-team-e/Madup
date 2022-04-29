@@ -18,7 +18,7 @@ class AdvertisementFa(factory.django.DjangoModelFactory):
     class Meta:
         model = Advertisement
 
-    advertisement_uid = fake.name()
+    advertisement_uid = '1'
     advertiser = factory.SubFactory(AdvertiserFa)
 
 
