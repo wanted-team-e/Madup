@@ -35,6 +35,7 @@ from advertisements.models import *
 
 base_path = settings.DATA_ROOT_URL + settings.DATA_URL # == './data/'
 csv_path = base_path + 'Madup_Wanted_Data_set.csv'
+print(f'csv_path: {csv_path}')
 
 def insert_advertiser() :
     with open(csv_path, newline = "", encoding = "utf-8") as csvfile :
@@ -79,6 +80,6 @@ def insert_advertisement_info() :
 
     print('AdvertisementInfo DATA UPLOADED SUCCESSFULY!')
 
-# insert_advertiser()
-# insert_advertisement()
-# insert_advertisement_info()
+insert_advertiser()
+insert_advertisement()
+insert_advertisement_info()
