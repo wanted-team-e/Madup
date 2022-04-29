@@ -11,32 +11,52 @@ python_files = test_*.py
 """
 
 
-from ast import arg
 from django.urls import reverse
 import pytest, json
+
+from ..models import Advertiser
 # Create your tests here.
 
 advertiser_url = reverse('advertisers-list') # /api/advertiser
-advertiser_url_detail = reverse('advertisers-detail', args=['13123']) # /api/advertiser/13123
+advertiser_url_detail = reverse('advertisers-detail', kwargs={'pk':'13123'}) # /api/advertiser/13123
 
 pytestmark = pytest.mark.django_db
 
 
+def test_adversiter():
+    a = Advertiser.objects.all()
+    print(a)
+    assert True
+
+
 
 # Detail retrieve가 안됨, 확인 필요
-@pytest.mark.skip
-def test_detail_get(client):
-    response = client.get('advertiser_url_detail')
-    print(advertiser_url_detail)
+# @pytest.mark.skip
+def test_detail_get(api_client):
+    client = api_client()
+    response = client.get(advertiser_url_detail)
+    print(Advertiser.objects.all().values('advertiser_uid'))
     assert response.status_code == 200
 
 
-# 테이블이 비어있는지 확인
+# List 확인
 def test_zero_data_or_empty_list(client):
+    Advertiser.objects.create(
+        advertiser_uid= "13123",
+        phone_number= "1231312",
+        address= "sdfsdf",
+        username= "1"
+    )
+
     response = client.get(advertiser_url)
     print(advertiser_url)
     assert response.status_code == 200
-    assert json.loads(response.content) == []
+    assert json.loads(response.content) == {
+    "advertiser_uid": "13123",
+    "phone_number": "1231312",
+    "address": "sdfsdf",
+    "username": "1"
+    }
 
 
 # # POST method 기능 확인
