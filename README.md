@@ -1,8 +1,9 @@
 # Team_E_Business Tesks _ Madup
 원티드 프리온보딩 코스 _ 첫번째 기업과제 _ 매드업
 
-###  배포 주소 [http://3.38.168.19/](http://3.38.168.19/)
-### 팀 노션 [https://www.notion.so/Needs-Check-7ac68cecc00d46e282f4b64cb691bdfa](https://www.notion.so/Needs-Check-7ac68cecc00d46e282f4b64cb691bdfa)
+###  배포 주소 [GoTo](http://3.38.168.19/)
+### 팀 노션 [GoTo](https://www.notion.so/Madup-0258d97f6b944653b226c0329b7a2af7)
+- 요구사항 분석, 정보 공유 및 프로젝트 진행을 위해 사용
 
 ## 과제 해석
 이 서비스는 csv 파일로 모아진 여러 광고주들의 광고별 데이터를 서버에 한번에 적재하고 통계를 확인할 수 있는 서비스입니다.
@@ -99,7 +100,7 @@
 **광고주 조회** : GET /api/advertiser
 <img src="./source/madup_api_advertiser_list.png" alt="api_advertiser_list"/>
 
-- pk 값에 해당하는 광고주의 정보를 조회합니다.
+- 광고주 정보를 조회합니다.
 
 **광고주 정보 수정** : PUT /api/advertiser/:pk
 <img src="./source/madup_api_advertiser_update.png" alt="api_advertiser_update"/>
