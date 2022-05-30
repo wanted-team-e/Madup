@@ -165,3 +165,7 @@ $ python manage.py runserver --settings=config.settings.develop
     - 요청된 형식에 맞는 광고 정보가 검색되지 않을 경우 400 code 리턴
 - 문서화
     - README.md 작성
+### 서재환
+- 초기 모델링
+- 광고주 KPI 관련 Division Zero 에러 처리
+-  ERD 제작
