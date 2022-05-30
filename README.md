@@ -1,7 +1,7 @@
 <div align="center"><img src="./source/logo.png" alt="logo" width="230"></div>
 
 # Madup_기업과제
-원티드 프리온보딩 코스 _ 첫번째 기업과제 _ 매드업
+---
 
 ###  배포 주소 [GoTo](http://3.38.168.19/)
 ### 팀 노션 [GoTo](https://www.notion.so/Madup-0258d97f6b944653b226c0329b7a2af7)
