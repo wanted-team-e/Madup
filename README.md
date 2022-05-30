@@ -1,4 +1,4 @@
-<img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.rocketpunch.com%2Fcompanies%2Fmadup&psig=AOvVaw0yixgH_moM84pcHHUEc4IO&ust=1653976695243000&source=images&cd=vfe&ved=0CAwQjRxqFwoTCNiE29rFhvgCFQAAAAAdAAAAABAN" alt="logo">
+<div align="center"><img src="./source/logo.png" alt="logo"></div>
 # Team_E_Business Tesks _ Madup
 원티드 프리온보딩 코스 _ 첫번째 기업과제 _ 매드업
 
@@ -140,10 +140,18 @@ $ python manage.py runserver --settings=config.settings.develop
 ```
 
 ## Author
-- Team Leader : 강정희
-	- db uploader, exceiption handling : [강정희](https://github.com/Jjenny-K)
-	- advertiser API, test code : [김채욱](https://github.com/kcw2297)
-	- model testing, exceiption handing : [서재환](https://github.com/woodstock1993)
-	- modeling, advertisement API, dockerize : [이형준](https://github.com/leeceo97)
-- 이름을 클릭하면 개인 repository도 확인 가능합니다.
-
+### 김채욱
+* Test Code
+    - advertiser api HTTP Method 별로 테스트 진행
+    - Model 부분은 facotry boy와 faker를 이용해 테스트
+    - pytest.ini설정 및 conftest 파일에 전체 함수 정의
+### 이형준
+* 모델링
+* advertiser API
+  * CRUD MODELViewset으로 구현
+  * 통계 api
+    * 검색 구현
+    * aggregate를 이용한 통계 데이터 구현
+* 배포
+  * docker(nginx, project 컨테이너) 이용
+  * aws ec2를 이용
