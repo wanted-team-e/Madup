@@ -1,4 +1,4 @@
-<div align="center"><img src="./source/logo.png" alt="logo"></div>
+<div align="center"><img src="./source/logo.png" alt="logo" width="230"></div>
 # Team_E_Business Tesks _ Madup
 원티드 프리온보딩 코스 _ 첫번째 기업과제 _ 매드업
 
@@ -155,3 +155,12 @@ $ python manage.py runserver --settings=config.settings.develop
 * 배포
   * docker(nginx, project 컨테이너) 이용
   * aws ec2를 이용
+### 강정희
+- 프로젝트 요구사항 분석
+- 초기 모델링
+    - 주어진 광고 csv 데이터를 분석해 데이터베이스 설계
+- 주어진 광고 csv 데이터 database uploader 구현
+- advertisement API 예외 처리 구현
+    - 요청된 형식에 맞는 광고 정보가 검색되지 않을 경우 400 code 리턴
+- 문서화
+    - README.md 작성
